@@ -106,7 +106,7 @@
                 Go back
               </button>
               <!--Disable if form is invalid-->
-              <button type="submit" class="btnSave btn btn-dark pull-right" [disabled]="memberForm.pristine || !memberForm.valid">
+              <button type="submit" class="btnSave btn btn-dark pull-right" [disabled]="!memberForm.valid">
                 Save Member
               </button>
             </form>
