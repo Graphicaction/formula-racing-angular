@@ -35,9 +35,9 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
     //Intializing Form group 
     this.memberForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      jobTitle: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.minLength(4)]],
+      lastName: ['', [Validators.required, Validators.minLength(4)]],
+      jobTitle: ['', [Validators.required, Validators.minLength(4)]],
       team: ['', Validators.required],
       status: ['', Validators.required]
     });
@@ -53,12 +53,9 @@ export class MemberDetailsComponent implements OnInit, OnChanges {
         });
       });
     }
+
     //Loading option values for teams
     this.appService.getTeams().subscribe(teams => this.teams = teams);
-    // this.teams = this.appService.getTeams();
-    // .subscribe(teams => this.teams = teams);
-   
-
   }
 
   ngOnChanges() {}

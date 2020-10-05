@@ -10,49 +10,95 @@
               <div>
                 <div class="row">
                   <div class="col-md-6">
-                    <input
+                    <div class="form-group">
+                      <input
                       type="text"
                       class="form-control"
                       id="firstName"
                       placeholder="First Name"
                       formControlName="firstName"
-                    />
+                      />
+                    </div>
+                    <div *ngIf="memberForm.controls['firstName'].invalid && (memberForm.controls['firstName'].dirty || memberForm.controls['firstName'].touched)" class="alert alert-danger">
+                      <div *ngIf="memberForm.controls['firstName'].errors.required">
+                        First Name is required.
+                      </div>
+                      <div *ngIf="memberForm.controls['firstName'].errors.minlength">
+                        Need minimum 4 characters.
+                      </div>
+                    </div>
                   </div>
                   <div class="col-md-6">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="lastName"
-                      placeholder="Last Name"
-                      formControlName="lastName"
-                    />
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="lastName"
+                        placeholder="Last Name"
+                        formControlName="lastName"
+                      />
+                    </div>
+                    <div *ngIf="memberForm.controls['lastName'].invalid && (memberForm.controls['lastName'].dirty || memberForm.controls['lastName'].touched)" class="alert alert-danger">
+                      <div *ngIf="memberForm.controls['lastName'].errors.required">
+                        Last Name is required.
+                      </div>
+                      <div *ngIf="memberForm.controls['lastName'].errors.minlength">
+                        Need minimum 4 characters.
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <br />
                 <div class="row">
                   <div class="col-md-6">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="jobTitle"
-                      placeholder="Job Title"
-                      formControlName="jobTitle"
-                    />
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="jobTitle"
+                        placeholder="Job Title"
+                        formControlName="jobTitle"
+                      />
+                    </div>
+                    <div *ngIf="memberForm.controls['jobTitle'].invalid && (memberForm.controls['jobTitle'].dirty || memberForm.controls['jobTitle'].touched)" class="alert alert-danger">
+                      <div *ngIf="memberForm.controls['jobTitle'].errors.required">
+                        Jobtitle is required.
+                      </div>
+                      <div *ngIf="memberForm.controls['jobTitle'].errors.minlength">
+                        Need minimum 4 characters.
+                      </div>
+                    </div>
                   </div>
                   <!--service call to get this list of teams-->
-                  <select id="team" class="col-md-6 custom-select" formControlName="team">
-                    <option *ngFor="let team of teams">{{ team.teamName }}</option>
-                  </select>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <select id="team" class="col-md-6 custom-select" formControlName="team">
+                        <option *ngFor="let team of teams">{{ team.teamName }}</option>
+                      </select>
+                    </div>
+                    <div *ngIf="memberForm.controls['team'].invalid && (memberForm.controls['team'].dirty || memberForm.controls['team'].touched)" class="alert alert-danger">
+                      <div *ngIf="memberForm.controls['team'].errors.required">
+                        Team is required.
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <br />
-                <div class="form-group col-md-6">
-                  <div class="row">
-                    <label id="activeStatus" class="md-check lead">
-                      <input type="radio" value="Active" name="status" formControlName="status"/> Active
-                    </label>
-                    <label class="md-check lead">
-                      <input type="radio" value="Inactive" name="status" formControlName="status" /> Inactive
-                    </label>
+                <div class="col-md-6">
+                  <div class="form-group ">
+                    <div class="row">
+                      <label id="activeStatus" class="md-check lead">
+                        <input type="radio" value="Active" name="status" formControlName="status"/> Active
+                      </label>
+                      <label class="md-check lead">
+                        <input type="radio" value="Inactive" name="status" formControlName="status" /> Inactive
+                      </label>
+                    </div>
+                  </div>
+                  <div *ngIf="memberForm.controls['status'].invalid && (memberForm.controls['status'].dirty || memberForm.controls['status'].touched)" class="alert alert-danger">
+                    <div *ngIf="memberForm.controls['status'].errors.required">
+                      Status is required.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -60,7 +106,7 @@
                 Go back
               </button>
               <!--Disable if form is invalid-->
-              <button type="submit" class="btnSave btn btn-dark pull-right" [disabled]="!memberForm.valid">
+              <button type="submit" class="btnSave btn btn-dark pull-right" [disabled]="memberForm.pristine || !memberForm.valid">
                 Save Member
               </button>
             </form>
