@@ -15,8 +15,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if (!this.appService.username || this.appService.username.length < 1) {
       let userStorageData = localStorage.getItem('username');
-      const userData = JSON.parse(userStorageData); 
-      this.appService.setUsername(userData.username);
+      if(userStorageData){
+        const userData = JSON.parse(userStorageData); 
+        this.appService.setUsername(userData.username);
+      }
     }
   }
 }
